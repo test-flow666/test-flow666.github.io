@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robert – Portfolio</title>
+<meta name="description" content="Robert – IMS student looking for a one-year apprenticeship as Informatiker EFZ Applikationsentwicklung (2026–27).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #945169;
+    --accent: #E1FF00;
+    --card: #303030;
+    --card-2: #3a3a3a;
+    --card-text: #ffb5de;
+    --tech: #f143a3;
+    --white: #ffffff;
+    --ink: #1b1b1b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Roboto Mono", monospace;
+    font-weight: 300;
+    background: var(--bg);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3 { font-family: "Bebas Neue", sans-serif; font-weight: 400; letter-spacing: .02em; line-height: 1; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(125, 66, 88, .92);
+    backdrop-filter: blur(8px);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .logo { font-family: "Bebas Neue"; font-size: 1.7rem; letter-spacing: .05em; text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 26px; list-style: none; font-size: .85rem; }
+  .nav-links a { text-decoration: none; opacity: .85; }
+  .nav-links a:hover { color: var(--accent); opacity: 1; }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+
+  /* Hero – bewusst knapp */
+  .hero { padding: 72px 0 64px; }
+  .hero .wrap { display: flex; align-items: center; gap: 40px; }
+  .avatar {
+    flex: none; width: 170px; height: 170px; border-radius: 50%;
+    overflow: hidden; border: 4px solid var(--accent);
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }
+  .hero h1 { font-size: clamp(3.4rem, 8vw, 6rem); }
+  .hero h1 span { color: var(--accent); }
+  .hero p { font-size: 1.05rem; margin: 10px 0 24px; max-width: 560px; }
+  .hero p strong { color: var(--accent); font-weight: 500; }
+  .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 500; font-size: .9rem;
+    padding: 12px 22px; border-radius: 8px; border: 2px solid var(--accent);
+    transition: transform .15s;
+  }
+  .btn.primary { background: var(--accent); color: var(--ink); }
+  .btn.ghost { color: var(--accent); }
+  .btn:hover { transform: translateY(-2px); }
+  @media (max-width: 640px) {
+    .hero .wrap { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .avatar { width: 120px; height: 120px; }
+  }
+
+  /* Section heads */
+  section { padding: 80px 0 0; }
+  .sec-label { color: var(--accent); font-size: .78rem; letter-spacing: .15em; text-transform: uppercase; }
+  .sec-title { font-size: clamp(2.8rem, 7vw, 4.5rem); margin: 2px 0 36px; }
+
+  /* Featured projects – gross, Bild dominiert */
+  .featured { display: flex; flex-direction: column; gap: 28px; }
+  .feature {
+    display: grid; grid-template-columns: 1.6fr 1fr;
+    background: var(--card); border-radius: 18px; overflow: hidden;
+  }
+  .feature:nth-child(even) { grid-template-columns: 1fr 1.6fr; }
+  .feature:nth-child(even) .shot { order: 2; }
+  .shot { background: #1f1f1f; overflow: hidden; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .5s; }
+  .feature:hover .shot img, .card:hover .shot img { transform: scale(1.04); }
+  .feature .shot { aspect-ratio: 16 / 10; }
+  .feature .info { padding: 34px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+  .meta { display: flex; gap: 10px; align-items: center; font-size: .75rem; }
+  .tag { background: var(--accent); color: var(--ink); font-weight: 500; padding: 3px 9px; border-radius: 4px; text-transform: uppercase; letter-spacing: .05em; }
+  .date { opacity: .6; }
+  .feature h3 { font-size: clamp(2rem, 4vw, 2.8rem); }
+  .feature p { color: var(--card-text); }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; }
+  .stack li { font-size: .75rem; color: var(--tech); border: 1px solid var(--tech); padding: 2px 9px; border-radius: 99px; font-weight: 500; }
+  @media (max-width: 820px) {
+    .feature, .feature:nth-child(even) { grid-template-columns: 1fr; }
+    .feature:nth-child(even) .shot { order: 0; }
+    .feature .info { padding: 24px; }
+  }
+
+  /* More projects */
+  .more-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 14px; margin: 64px 0 22px; }
+  .more-head h3 { font-size: 2rem; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filters button {
+    font: inherit; font-size: .78rem; cursor: pointer; color: var(--white);
+    background: transparent; border: 1px solid rgba(255,255,255,.35);
+    padding: 5px 13px; border-radius: 99px;
+  }
+  .filters button.on { background: var(--accent); color: var(--ink); border-color: var(--accent); font-weight: 500; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  .card { background: var(--card); border-radius: 14px; overflow: hidden; }
+  .card[hidden] { display: none; }
+  .card .shot { aspect-ratio: 16 / 10; }
+  .card .info { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; }
+  .card h4 { font-family: "Bebas Neue"; font-weight: 400; font-size: 1.55rem; letter-spacing: .02em; line-height: 1; }
+  .card p { font-size: .82rem; color: var(--card-text); }
+  .noshot { display: grid; place-content: center; height: 100%; font-family: "Bebas Neue"; font-size: 2.2rem; color: var(--accent); background: repeating-linear-gradient(45deg, #2a2a2a 0 12px, #303030 12px 24px); }
+
+  /* Skills – knapp, Rest ausklappbar */
+  .top-skills { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin-bottom: 22px; }
+  .top-skills li {
+    font-family: "Bebas Neue"; font-size: 1.6rem; letter-spacing: .03em;
+    background: var(--card); padding: 8px 18px; border-radius: 10px;
+  }
+  details { background: var(--card); border-radius: 14px; padding: 18px 22px; }
+  summary { cursor: pointer; color: var(--accent); font-weight: 500; }
+  .skill-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 20px; }
+  .skill-groups h4 { color: var(--card-text); font-weight: 500; font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; }
+  .chips li { font-size: .78rem; padding: 4px 10px; border-radius: 99px; background: var(--card-2); }
+
+  /* About – drei Kacheln */
+  .about { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .tile { background: var(--card); border-radius: 14px; padding: 24px; }
+  .tile h3 { font-size: 1.6rem; color: var(--card-text); margin-bottom: 14px; }
+  .tile ul { list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: .88rem; }
+  .tile .k { display: block; font-size: .72rem; color: var(--accent); letter-spacing: .08em; }
+  @media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+
+  /* Footer */
+  footer { margin-top: 100px; background: var(--ink); padding: 72px 0 32px; text-align: center; }
+  footer h2 { font-size: clamp(2.6rem, 7vw, 4.2rem); }
+  footer h2 span { color: var(--accent); }
+  footer p { max-width: 560px; margin: 14px auto 28px; opacity: .85; }
+  .copyright { margin-top: 48px; font-size: .75rem; opacity: .5; }
+  .shot { display: block; }
+  .links { display: flex; gap: 18px; font-size: .82rem; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; margin-top: 4px; }
+  .links a { text-decoration: none; color: var(--tech); }
+  .links a.view { color: var(--accent); border-left: 3px solid var(--accent); padding-left: 8px; }
+  .links a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">ROBERT<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="avatar"><img src="img/robert.jpg" alt="Profile picture of Robert"></div>
+    <div>
+      <h1>Hi, I'm <span>Robert</span></h1>
+      <p>IMS student looking for a <strong>one-year apprenticeship (2026–27)</strong> as Informatiker EFZ – Applikationsentwicklung.</p>
+      <div class="btns">
+        <a class="btn primary" href="#projects">See my projects ↓</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-label">Beyond my horizon</div>
+      <h2 class="sec-title">Projects</h2>
+
+      <div class="featured">
+        <article class="feature">
+          <a class="shot" href="https://robintea.github.io/History-Interactive-Story/" target="_blank" rel="noopener"><img src="img/projects/NEARWW3.jpg" alt="Screenshot of the History Interactive Story"></a>
+          <div class="info">
+            <div class="meta"><span class="tag">Website</span><span class="date">APR 2026</span></div>
+            <h3>History Interactive Story</h3>
+            <p>Project for a history assignment, based on tensions in the Cold War. Interactive fiction with timed decisions.</p>
+            <ul class="stack"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+            <div class="links"><a class="view" href="https://robintea.github.io/History-Interactive-Story/" target="_blank" rel="noopener">View project →</a><a href="https://github.com/RobinTea/History-Interactive-Story" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="feature">
+          <a class="shot" href="https://github.com/RobinTea/HandyClock" target="_blank" rel="noopener"><img src="img/projects/HandyClock.jpg" alt="Screenshot of Handy Clock recognising a hand gesture"></a>
+          <div class="info">
+            <div class="meta"><span class="tag">Application</span><span class="date">FEB 2026</span></div>
+            <h3>Handy Clock</h3>
+            <p>Hand tracking using MediaPipe – recognises gestures live from the webcam.</p>
+            <ul class="stack"><li>Python</li><li>MediaPipe</li></ul>
+            <div class="links"><a class="view" href="https://github.com/RobinTea/HandyClock" target="_blank" rel="noopener">View project →</a></div>
+          </div>
+        </article>
+
+        <article class="feature">
+          <a class="shot" href="https://github.com/RobinTea/Word_Predictor_AI/releases" target="_blank" rel="noopener"><img src="img/projects/wordPredictor.jpg" alt="Screenshot of the German N-gram Word Predictor"></a>
+          <div class="info">
+            <div class="meta"><span class="tag">Application</span><span class="date">SEP 2025</span></div>
+            <h3>Word Predictor</h3>
+            <p>Mini AI that suggests the next word, trained on a text corpus of one million German sentences.</p>
+            <ul class="stack"><li>Python</li><li>Jupyter</li></ul>
+            <div class="links"><a class="view" href="https://github.com/RobinTea/Word_Predictor_AI/releases" target="_blank" rel="noopener">View project →</a></div>
+          </div>
+        </article>
+
+        <article class="feature">
+          <a class="shot" href="https://github.com/RobinTea/DeskClock/releases" target="_blank" rel="noopener"><img src="img/projects/deskClock.jpg" alt="Screenshot of DeskClock on a desktop background"></a>
+          <div class="info">
+            <div class="meta"><span class="tag">Application</span><span class="date">SEP 2025</span></div>
+            <h3>DeskClock</h3>
+            <p>Customizable desktop background clock – a clock, for me, for free.</p>
+            <ul class="stack"><li>C#</li><li>WPF</li></ul>
+            <div class="links"><a class="view" href="https://github.com/RobinTea/DeskClock/releases" target="_blank" rel="noopener">View project →</a><a href="https://github.com/RobinTea/DeskClock" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="more-head">
+        <h3>More projects</h3>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button class="on" data-filter="all">All</button>
+          <button data-filter="website">Websites</button>
+          <button data-filter="code">Code &amp; Hardware</button>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card" data-type="website">
+          <a class="shot" href="https://robintea.github.io/Lernperiode-13/" target="_blank" rel="noopener"><img src="img/projects/projects-display.jpg" alt="" loading="lazy"></a>
+          <div class="info">
+            <div class="meta"><span class="tag">Website</span><span class="date">JAN 2026</span></div>
+            <h4>Projects Display</h4>
+            <p>A page listing nearly all my projects.</p>
+            <ul class="stack"><li>HTML</li><li>CSS</li><li>JS</li></ul>
+            <div class="links"><a class="view" href="https://robintea.github.io/Lernperiode-13/" target="_blank" rel="noopener">View project →</a></div>
+          </div>
+        </article>
+        <article class="card" data-type="website">
+          <a class="shot" href="https://robintea.github.io/Lernperiode-13/boot/index.html" target="_blank" rel="noopener"><img src="img/projects/bootstrap.jpg" alt="" loading="lazy"></a>
+          <div class="info">
+            <div class="meta"><span class="tag">Website</span><span class="date">JAN 2026</span></div>
+            <h4>Bootstrap</h4>
+            <p>Replication of the Tailwind project, built with Bootstrap.</p>
+            <ul class="stack"><li>HTML</li><li>CSS</li><li>Bootstrap</li></ul>
+            <div class="links"><a class="view" href="https://robintea.github.io/Lernperiode-13/boot/index.html" target="_blank" rel="noopener">View project →</a></div>
+          </div>
+        </article>
+        <article class="card" data-type="website">
+          <a class="shot" href="https://robintea.github.io/Lernperiode-13/tail/index.html" target="_blank" rel="noopener"><img src="img/projects/tailwind.jpg" alt="" loading="lazy"></a>
+          <div class="info">
+            <div class="meta"><span class="tag">Website</span><span class="date">JAN 2026</span></div>
+            <h4>Tailwind</h4>
+            <p>A static site to test and learn the features of Tailwind.</p>
+            <ul class="stack"><li>HTML</li><li>Tailwind</li></ul>
+            <div class="links"><a class="view" href="https://robintea.github.io/Lernperiode-13/tail/index.html" target="_blank" rel="noopener">View project →</a></div>
+          </div>
+        </article>
+        <article class="card" data-type="website">
+          <a class="shot" href="https://robintea.github.io/Lernperiode-13/spline/index.html" target="_blank" rel="noopener"><img src="img/projects/spline.jpg" alt="" loading="lazy"></a>
+          <div class="info">
+            <div class="meta"><span class="tag">Website</span><span class="date">JAN 2026</span></div>
+            <h4>Spline</h4>
+            <p>Testing Spline with my own 3D models.</p>
+            <ul class="stack"><li>HTML</li><li>Blender</li></ul>
+            <div class="links"><a class="view" href="https://robintea.github.io/Lernperiode-13/spline/index.html" target="_blank" rel="noopener">View project →</a></div>
+          </div>
+        </article>
+        <article class="card" data-type="code">
+          <a class="shot" href="https://robintea.github.io/Lernperiode-9/" target="_blank" rel="noopener"><img src="img/projects/aoc25.jpg" alt="" loading="lazy"></a>
+          <div class="info">
+            <div class="meta"><span class="tag">Code</span><span class="date">DEC 2025</span></div>
+            <h4>New Language: C++</h4>
+            <p>Learned the basics and solved Advent of Code riddles.</p>
+            <ul class="stack"><li>C++</li><li>VS Code</li></ul>
+            <div class="links"><a class="view" href="https://robintea.github.io/Lernperiode-9/" target="_blank" rel="noopener">View project →</a></div>
+          </div>
+        </article>
+        <article class="card" data-type="website">
+          <a class="shot" href="https://robintea.github.io/portfolio/" target="_blank" rel="noopener"><img src="img/projects/portfolio.jpg" alt="" loading="lazy"></a>
+          <div class="info">
+            <div class="meta"><span class="tag">Website</span><span class="date">DEC 2025</span></div>
+            <h4>Portfolio</h4>
+            <p>First portfolio – a keyboard-controlled browser with tabs.</p>
+            <ul class="stack"><li>HTML</li><li>CSS</li><li>JS</li></ul>
+            <div class="links"><a class="view" href="https://robintea.github.io/portfolio/" target="_blank" rel="noopener">View project →</a><a href="https://github.com/RobinTea/portfolio" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
+        </article>
+        <article class="card" data-type="website">
+          <a class="shot" href="https://robintea.github.io/Lernperiode-9/" target="_blank" rel="noopener"><img src="img/projects/flower.jpg" alt="" loading="lazy"></a>
+          <div class="info">
+            <div class="meta"><span class="tag">Prototype</span><span class="date">MAR 2025</span></div>
+            <h4>Modern Design</h4>
+            <p>Tried to find a "modern" feel that I liked.</p>
+            <ul class="stack"><li>HTML</li><li>CSS</li><li>JS</li></ul>
+            <div class="links"><a class="view" href="https://robintea.github.io/Lernperiode-9/" target="_blank" rel="noopener">View project →</a><a href="https://github.com/RobinTea/Lernperiode-9" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
+        </article>
+        <article class="card" data-type="website">
+          <a class="shot" href="https://robintea.github.io/" target="_blank" rel="noopener"><img src="img/projects/card-website.jpg" alt="" loading="lazy"></a>
+          <div class="info">
+            <div class="meta"><span class="tag">Website</span><span class="date">JUN 2024</span></div>
+            <h4>First Static Website</h4>
+            <p>School project, evaluated by a teacher – the main feature being the cards.</p>
+            <ul class="stack"><li>HTML</li><li>CSS</li></ul>
+            <div class="links"><a class="view" href="https://robintea.github.io/" target="_blank" rel="noopener">View project →</a></div>
+          </div>
+        </article>
+        <article class="card" data-type="code">
+          <div class="shot"><div class="noshot">⌨ Keyboards</div></div>
+          <div class="info">
+            <div class="meta"><span class="tag">Hardware</span><span class="date">Side project</span></div>
+            <h4>Truce &amp; Tironia</h4>
+            <p>Custom keyboards built from scratch.</p>
+            <ul class="stack"><li>Ergogen</li><li>KiCad</li></ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-label">When the unknown becomes known</div>
+      <h2 class="sec-title">Skills</h2>
+
+      <ul class="top-skills">
+        <li>C#</li><li>Python</li><li>JavaScript</li><li>HTML / CSS</li><li>SQL</li><li>C++</li><li>Git</li><li>Docker</li>
+      </ul>
+
+      <details>
+        <summary>Show all skills</summary>
+        <div class="skill-groups">
+          <div>
+            <h4>Programming</h4>
+            <ul class="chips"><li>C#</li><li>C++</li><li>Python</li><li>JavaScript</li><li>PowerShell</li><li>OOP</li><li>Backend / Frontend</li></ul>
+          </div>
+          <div>
+            <h4>Web &amp; Mobile</h4>
+            <ul class="chips"><li>HTML / CSS</li><li>Tailwind</li><li>Bootstrap</li><li>Expo</li><li>Mobile App Development</li></ul>
+          </div>
+          <div>
+            <h4>Data &amp; AI</h4>
+            <ul class="chips"><li>SQL</li><li>MS SQL Server Management Studio</li><li>NoSQL / MongoDB</li><li>Query, edit &amp; maintain databases</li><li>Predictions with Jupyter</li><li>ICT solutions with machine learning</li></ul>
+          </div>
+          <div>
+            <h4>Infrastructure &amp; Tools</h4>
+            <ul class="chips"><li>Git</li><li>Docker (basics)</li><li>AWS</li><li>Linux (Ubuntu)</li><li>Networking infrastructure (basics)</li><li>IT &amp; network infrastructure</li><li>Office 365</li></ul>
+          </div>
+          <div>
+            <h4>Methods &amp; Security</h4>
+            <ul class="chips"><li>Agile methods</li><li>Application testing (basics)</li><li>Planning &amp; implementing small projects</li><li>Business processes</li><li>Data protection &amp; data security</li><li>Coding, compression &amp; encryption</li></ul>
+          </div>
+          <div>
+            <h4>Learning next</h4>
+            <ul class="chips"><li>TypeScript</li><li>React</li><li>Next.js</li><li>Angular</li><li>Supabase</li><li>Kubernetes</li><li>Rust</li><li>Go</li><li>PHP</li><li>DevOps</li><li>Distributed systems</li><li>Innovation management</li></ul>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-label">Per aspera ad astra</div>
+      <h2 class="sec-title">About</h2>
+
+      <div class="about">
+        <div class="tile">
+          <h3>Education</h3>
+          <ul>
+            <li><span class="k">2026 – 2027</span>Informatiker EFZ – practical year</li>
+            <li><span class="k">2023 – present</span>Computer Science (IMS)<br>Application development &amp; systems engineering</li>
+            <li><span class="k">2023 – present</span>Berufsmaturität – economy &amp; law</li>
+          </ul>
+        </div>
+        <div class="tile">
+          <h3>Languages</h3>
+          <ul>
+            <li><span class="k">Native</span>German</li>
+            <li><span class="k">Fluent (C1)</span>English</li>
+            <li><span class="k">Basic (A2)</span>French</li>
+          </ul>
+        </div>
+        <div class="tile">
+          <h3>Tech interests</h3>
+          <ul>
+            <li><span class="k">Hardware</span>Microcontrollers: nice!nano, Arduino, Raspberry Pi</li>
+            <li><span class="k">Creative</span>3D design with Blender</li>
+            <li><span class="k">Video</span>Editing with DaVinci Resolve</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Open for new <span>experiences</span></h2>
+    <p>Looking for a one-year apprenticeship (2026–27) as Informatiker EFZ – Applikationsentwicklung in Switzerland.</p>
+    <a class="btn primary" href="mailto:robert@example.com">Get in touch</a>
+    <div class="copyright">© 2026 Robert</div>
+  </div>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll(".filters button");
+  const cards = document.querySelectorAll(".card");
+  buttons.forEach(btn => btn.addEventListener("click", () => {
+    buttons.forEach(b => b.classList.toggle("on", b === btn));
+    const f = btn.dataset.filter;
+    cards.forEach(c => c.hidden = f !== "all" && c.dataset.type !== f);
+  }));
+</script>
+</body>
+</html>
